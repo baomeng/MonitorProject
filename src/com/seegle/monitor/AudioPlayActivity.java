@@ -36,7 +36,7 @@ public class AudioPlayActivity extends BaseActivity {
 
 	List<MediaInfo> mAudiolist = new ArrayList<MediaInfo>();
 
-	private List<MediaInfo> getAudioData() {
+	private List<MediaInfo> getAudioDataFromSD() {
 
 		String[] projection = new String[] { MediaStore.Audio.Media._ID,
 				MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DURATION,
@@ -57,9 +57,9 @@ public class AudioPlayActivity extends BaseActivity {
 			int audioSum = cursor.getCount();
 			for (int counter = 0; counter < audioSum; counter++) {
 				MediaInfo data = new MediaInfo();
-				data.mVideoName = cursor.getString(nameIndex); //
-				data.mVideoDuration = cursor.getInt(durationIndex); //
-				data.mVideoPath = cursor.getString(pathIndex); //
+				data.mName = cursor.getString(nameIndex); //
+				data.mDuration = cursor.getInt(durationIndex); //
+				data.mPath = cursor.getString(pathIndex); //
 				mAudiolist.add(data);
 				cursor.moveToNext();
 			}
@@ -68,6 +68,22 @@ public class AudioPlayActivity extends BaseActivity {
 		return mAudiolist;
 	}
 
+	public List<HashMap<String, Object>> getListData() {
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> map = null;
+		int i;
+		for (i = 0; i < mAudiolist.size(); i++) {
+			map = new HashMap<String, Object>();
+			map.put("path", mAudiolist.get(i).mPath);
+			map.put("title", "名称：" + mAudiolist.get(i).mName);
+			int m = mAudiolist.get(i).mDuration;
+			String strDuration = Util.millisTimeToDotFormat(m, false, false);
+			map.put("info", "时长：" + strDuration);
+			list.add(map);
+		}
+		return list;
+	}
+	
 	MyListView mListView;
 	private Button button;
 
@@ -77,12 +93,14 @@ public class AudioPlayActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audioplay);
 
-		getAudioData();
+		getAudioDataFromSD();
 
 		mListView = (MyListView) findViewById(R.id.listView1);
+		
 		List<HashMap<String, Object>> mListData = getListData();
+		
 		SimpleAdapter adapter = new SimpleAdapter(this, mListData,
-				R.layout.imageview, new String[] { "title", "info"},
+				R.layout.audioinfo, new String[] { "title", "info"},
 				new int[] { R.id.textView1, R.id.textView2 });
 
 		adapter.setViewBinder(new ViewBinder() {
@@ -137,9 +155,9 @@ public class AudioPlayActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 
 				ListView listView = (ListView) arg0;
-				HashMap<String, Object> Audio = (HashMap<String, Object>) listView
+				HashMap<String, Object> map = (HashMap<String, Object>) listView
 						.getItemAtPosition(arg2);
-				Object obj = Audio.get("path");
+				Object obj = map.get("path");
 
 				if (fileIsExists(obj.toString())) {
 					Intent intent = new Intent(AudioPlayActivity.this,
@@ -161,39 +179,6 @@ public class AudioPlayActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});
-
-	}
-
-	class MyAdatper extends BaseAdapter {
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 10;
-		}
-
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View contentView, ViewGroup arg2) {
-			// TODO Auto-generated method stub
-			if (contentView == null) {
-				contentView = LayoutInflater.from(getApplicationContext())
-						.inflate(R.layout.myexam_item, null);
-			}
-
-			return contentView;
-		}
 
 	}
 
@@ -247,21 +232,5 @@ public class AudioPlayActivity extends BaseActivity {
 			return false;
 		}
 		return true;
-	}
-
-	public List<HashMap<String, Object>> getListData() {
-		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> map = null;
-		int i;
-		for (i = 0; i < mAudiolist.size(); i++) {
-			map = new HashMap<String, Object>();
-			map.put("path", mAudiolist.get(i).mVideoPath);
-			map.put("title", "名称：" + mAudiolist.get(i).mVideoName);
-			int m = mAudiolist.get(i).mVideoDuration;
-			String strDuration = Util.millisTimeToDotFormat(m, false, false);
-			map.put("info", "时长：" + strDuration);
-			list.add(map);
-		}
-		return list;
 	}
 }

@@ -1,7 +1,9 @@
 package com.seegle.monitor;
 
+import android.widget.ImageView;
+
 public class MediaInfo {
-    public String mVideoName;      // 名
-    public int    mVideoDuration;  // 时长
-    public String mVideoPath;      // 路径
+    public String    mName;      // 名
+    public int       mDuration;  // 时长
+    public String    mPath;      // 路径
 }

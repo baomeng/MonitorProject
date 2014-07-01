@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class login extends BaseActivity{
+public class login extends Activity{
 	
 	private   Toast          mToast             = null;
 	protected Button         mBtnlogin         	= null;

@@ -37,7 +37,7 @@ public class MainActivity extends TabActivity {
         spec=tabHost.newTabSpec("视频").setIndicator("视频").setContent(intent);
         tabHost.addTab(spec);
         
-        intent=new Intent().setClass(this, MyMessageActivity.class);
+        intent=new Intent().setClass(this, TestAdapter.class);
         spec=tabHost.newTabSpec("我的通知").setIndicator("我的通知").setContent(intent);
         tabHost.addTab(spec);
         

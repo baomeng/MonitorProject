@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.seegle.monitor.MyListView.OnRefreshListener;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -17,6 +20,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -24,43 +28,68 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
+import android.widget.TextView;
 
 public class VideoPlayActivity extends BaseActivity {
 
-	List<MediaInfo> mVideolist = new ArrayList<MediaInfo>();
+	List<MediaInfo> mVideolistSD = new ArrayList<MediaInfo>();
 
-	private List<MediaInfo> getVideoData() {
+	private List<MediaInfo> getVideoDataFromSD() {
 
-		String[] projection = new String[] { MediaStore.Video.Media._ID,
-				MediaStore.Video.Media.TITLE, MediaStore.Video.Media.DURATION,
+		String[] projection = new String[] { 
+				MediaStore.Video.Media._ID,
+				MediaStore.Video.Media.TITLE, 
+				MediaStore.Video.Media.DURATION,
 				MediaStore.Video.Media.DATA };
 
-		Cursor cursor = this.getContentResolver().query(
-				MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection, null,
-				null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
+		Cursor cursor = this.getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection, null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
 
 		if (cursor != null) {
 			cursor.moveToFirst();
 
 			int nameIndex = cursor.getColumnIndex(MediaStore.Video.Media.TITLE);
-			int durationIndex = cursor
-					.getColumnIndex(MediaStore.Video.Media.DURATION);
+			int durationIndex = cursor.getColumnIndex(MediaStore.Video.Media.DURATION);
 			int pathIndex = cursor.getColumnIndex(MediaStore.Video.Media.DATA);
 
-			int audioSum = cursor.getCount();
-			for (int counter = 0; counter < audioSum; counter++) {
+			int VideoSum = cursor.getCount();
+			for (int counter = 0; counter < VideoSum; counter++) {
 				MediaInfo data = new MediaInfo();
-				data.mVideoName = cursor.getString(nameIndex); //
-				data.mVideoDuration = cursor.getInt(durationIndex); //
-				data.mVideoPath = cursor.getString(pathIndex); //
-				mVideolist.add(data);
+				data.mName = cursor.getString(nameIndex); //
+				data.mDuration = cursor.getInt(durationIndex); //
+				data.mPath = cursor.getString(pathIndex); //
+				mVideolistSD.add(data);
 				cursor.moveToNext();
 			}
 			cursor.close();
 		}
-		return mVideolist;
+		return mVideolistSD;
+	}
+	
+	public List<HashMap<String, Object>> getListViewVideoData() {
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> map = null;
+		int i;
+		for (i = 0; i < mVideolistSD.size(); i++) {
+			
+			map = new HashMap<String, Object>();
+			
+			map.put("path", mVideolistSD.get(i).mPath);
+			map.put("title", "名称：" + mVideolistSD.get(i).mName);
+			
+			int iDuration = mVideolistSD.get(i).mDuration;
+			String strDuration = Util.millisTimeToDotFormat(iDuration, false, false);
+			map.put("info", "时长：" + strDuration);
+			
+			if (fileIsExists(mVideolistSD.get(i).mPath))
+				map.put("img",getVideoThumbnail(mVideolistSD.get(i).mPath, 120, 120, MediaStore.Images.Thumbnails.MICRO_KIND));
+			
+			list.add(map);
+			
+		}
+		return list;
 	}
 
+	private List<HashMap<String, Object>> data;
 	MyListView mListView;
 	private Button button;
 
@@ -70,11 +99,14 @@ public class VideoPlayActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.thumbnail);
 
-		getVideoData();
-
 		mListView = (MyListView) findViewById(R.id.listView1);
-		// mListView.setAdapter(new MyAdatper());
-		List<HashMap<String, Object>> mListData = getListData();
+		
+		getVideoDataFromSD();
+		data = getListViewVideoData();
+		
+//		mListView.setAdapter(new BaseListAdapter(this));
+		
+		List<HashMap<String, Object>> mListData = getListViewVideoData();
 		SimpleAdapter adapter = new SimpleAdapter(this, mListData,
 				R.layout.imageview, new String[] { "title", "info", "img" },
 				new int[] { R.id.textView1, R.id.textView2, R.id.imageView1 });
@@ -134,9 +166,9 @@ public class VideoPlayActivity extends BaseActivity {
 				// arg2), Toast.LENGTH_LONG).show();
 
 				ListView listView = (ListView) arg0;
-				HashMap<String, Object> video = (HashMap<String, Object>) listView
+				HashMap<String, Object> map = (HashMap<String, Object>) listView
 						.getItemAtPosition(arg2);
-				Object obj = video.get("path");
+				Object obj = map.get("path");
 				// Toast.makeText(VideoPlayActivity.this,
 				// obj.toString(),Toast.LENGTH_LONG).show();
 
@@ -163,38 +195,81 @@ public class VideoPlayActivity extends BaseActivity {
 
 	}
 
-	class MyAdatper extends BaseAdapter {
+    private class BaseListAdapter extends BaseAdapter{
 
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 10;
-		}
+        private Context mContext;
+        private LayoutInflater inflater;
+        
+        public BaseListAdapter(Context mContext) {
+            this.mContext = mContext;
+            inflater = LayoutInflater.from(mContext);
+        }
+        
+        @Override
+        public int getCount() {
+            return data.size();
+        }
 
-		@Override
-		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
 
-		@Override
-		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
 
-		@Override
-		public View getView(int position, View contentView, ViewGroup arg2) {
-			// TODO Auto-generated method stub
-			if (contentView == null) {
-				contentView = LayoutInflater.from(getApplicationContext())
-						.inflate(R.layout.myexam_item, null);
-			}
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder = null;
+            if(convertView == null) {
+                viewHolder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.imageview, null);
+                viewHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView1);
+                viewHolder.title = (TextView) convertView.findViewById(R.id.textView1);
+                viewHolder.info = (TextView) convertView.findViewById(R.id.textView2);
+                
+                convertView.setTag(viewHolder);
+                
+            } else {
+            	
+                viewHolder = (ViewHolder) convertView.getTag();
+                
+            }
+            
+//            System.out.println("viewHolder = " + viewHolder);
+            
+            System.out.println("viewHolder.imageView = " + (Bitmap) getListViewVideoData().get(position).get("img"));
+            System.out.println("viewHolder.title = " + (CharSequence) getListViewVideoData().get(position).get("title"));
+            System.out.println("viewHolder.info = " + (CharSequence) getListViewVideoData().get(position).get("info"));
+            
+            viewHolder.imageView.setImageBitmap((Bitmap) data.get(position).get("img"));           
+            viewHolder.title.setText((CharSequence) data.get(position).get("title"));
+            viewHolder.info.setText((CharSequence) data.get(position).get("info"));
+            
+            return convertView;
+        }
+       
+        class ViewHolder {
+            ImageView imageView;
+            TextView  title;
+            TextView  info;
+        }
 
-			return contentView;
-		}
-	}
-
+//        private void showInfo() {
+//            new AlertDialog.Builder(TestBaseAdapter.this).setTitle("my listview").setMessage("introduce....").
+//            setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    // TODO Auto-generated method stub
+//                    
+//                }
+//            }).show();
+//        }
+    }
+    
 	/**
 	 * 根据指定的图像路径和大小来获取缩略图 此方法有两点好处： 1.
 	 * 使用较小的内存空间，第一次获取的bitmap实际上为null，只是为了读取宽度和高度，
@@ -272,25 +347,5 @@ public class VideoPlayActivity extends BaseActivity {
 			return false;
 		}
 		return true;
-	}
-
-	public List<HashMap<String, Object>> getListData() {
-		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> map = null;
-		int i;
-		for (i = 0; i < mVideolist.size(); i++) {
-			map = new HashMap<String, Object>();
-			map.put("path", mVideolist.get(i).mVideoPath);
-			map.put("title", "名称：" + mVideolist.get(i).mVideoName);
-			int m = mVideolist.get(i).mVideoDuration;
-			String strDuration = Util.millisTimeToDotFormat(m, false, false);
-			map.put("info", "时长：" + strDuration);
-			if (fileIsExists(mVideolist.get(i).mVideoPath))
-				map.put("img",
-						getVideoThumbnail(mVideolist.get(i).mVideoPath, 120,
-								120, MediaStore.Images.Thumbnails.MICRO_KIND));
-			list.add(map);
-		}
-		return list;
 	}
 }
