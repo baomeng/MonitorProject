@@ -74,6 +74,28 @@ public class VideoPlayActivity extends BaseActivity {
 
 		mListView = (MyListView) findViewById(R.id.listView1);
 		// mListView.setAdapter(new MyAdatper());
+		List<HashMap<String, Object>> mListData = getListData();
+		SimpleAdapter adapter = new SimpleAdapter(this, mListData,
+				R.layout.imageview, new String[] { "title", "info", "img" },
+				new int[] { R.id.textView1, R.id.textView2, R.id.imageView1 });
+
+		adapter.setViewBinder(new ViewBinder() {
+
+			public boolean setViewValue(View view, Object data,
+					String textRepresentation) {
+				// 判断是否为我们要处理的对象
+				if (view instanceof ImageView && data instanceof Bitmap) {
+					ImageView iv = (ImageView) view;
+
+					iv.setImageBitmap((Bitmap) data);
+					return true;
+				} else
+					return false;
+			}
+		});
+
+		mListView.setAdapter(adapter);
+		
 		mListView.setOnRefreshListener(new OnRefreshListener() {
 
 			@Override
@@ -102,28 +124,6 @@ public class VideoPlayActivity extends BaseActivity {
 
 			}
 		});
-
-		List<HashMap<String, Object>> mListData = getListData();
-		SimpleAdapter adapter = new SimpleAdapter(this, mListData,
-				R.layout.imageview, new String[] { "title", "info", "img" },
-				new int[] { R.id.textView1, R.id.textView2, R.id.imageView1 });
-
-		adapter.setViewBinder(new ViewBinder() {
-
-			public boolean setViewValue(View view, Object data,
-					String textRepresentation) {
-				// 判断是否为我们要处理的对象
-				if (view instanceof ImageView && data instanceof Bitmap) {
-					ImageView iv = (ImageView) view;
-
-					iv.setImageBitmap((Bitmap) data);
-					return true;
-				} else
-					return false;
-			}
-		});
-
-		mListView.setAdapter(adapter);
 
 		mListView.setOnItemClickListener(new ListView.OnItemClickListener() {
 			@Override
