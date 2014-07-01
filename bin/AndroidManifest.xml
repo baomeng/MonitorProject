@@ -1,0 +1,131 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.seegle.monitor"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+       <activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.WelComeActivity" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+        </activity>
+ 		<activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.login" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter >
+                <action android:name="android.intent.action.login" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+ 		<activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.MainActivity" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter >
+                <action android:name="android.intent.action.MainActivity" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+      <activity android:name="com.seegle.monitor.PlayActivity" 
+				  android:screenOrientation="portrait" 
+				  android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="seegle.monitor.action.main_view" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.seegle.monitor.AudioPlayActivity" 
+				  android:screenOrientation="portrait" 
+				  android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="seegle.monitor.action.AudioPlayActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity  android:name=".MyMessageActivity"></activity>
+        <activity  android:name=".SettingActivity"></activity>
+        
+        <activity android:name="com.seegle.monitor.waiting" 
+				  android:screenOrientation="portrait" 
+				  android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="seegle.monitor.action.main_view" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+      
+              <activity android:name="com.seegle.monitor.listview" 
+				  android:screenOrientation="portrait" 
+				  android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="seegle.monitor.action.main_view" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity android:name="com.seegle.monitor.tree" 
+				  android:screenOrientation="portrait" 
+				  android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="seegle.monitor.action.main_view" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+            <activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.activity2" 
+            android:screenOrientation="portrait" >
+            <intent-filter >
+                <action android:name="android.intent.action.activity2" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.VideoPlayActivity" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+            <intent-filter >
+                <action android:name="android.intent.action.AndroidTestActivity" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+              <activity
+            android:label="@string/app_name"
+            android:name="com.seegle.monitor.VodeoPlayActivity" 
+            android:screenOrientation="portrait" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter >
+                <action android:name="android.intent.action.AndroidTestActivity" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+    </application>
+
+</manifest>

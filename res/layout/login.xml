@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:background="@drawable/default_bg" >
+
+    <com.seegle.monitor.ClearEditText
+        android:id="@+id/password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/username"
+        android:drawableLeft="@drawable/account_icon"
+        android:drawableRight="@drawable/cancel_nor"
+        android:ems="10"
+        android:hint="输入密码"
+        android:password="true"
+        android:singleLine="true" />
+
+    <com.seegle.monitor.ClearEditText
+        android:id="@+id/username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="94dp"
+        android:drawableLeft="@drawable/account_icon"
+        android:drawableRight="@drawable/cancel_nor"
+        android:ems="10"
+        android:hint="输入用户名"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/i_btn"
+        android:text="登录"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+  
+</RelativeLayout>  
