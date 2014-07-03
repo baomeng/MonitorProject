@@ -30,20 +30,20 @@ public class MainActivity extends TabActivity {
         Intent intent;
 
         intent=new Intent().setClass(this, AudioPlayActivity.class);
-        spec=tabHost.newTabSpec("ÒôÆµ").setIndicator("ÒôÆµ").setContent(intent);
+        spec=tabHost.newTabSpec("éŸ³é¢‘").setIndicator("éŸ³é¢‘").setContent(intent);
         tabHost.addTab(spec);
         
         intent=new Intent().setClass(this, VideoPlayActivity.class);
-        spec=tabHost.newTabSpec("ÊÓÆµ").setIndicator("ÊÓÆµ").setContent(intent);
+        spec=tabHost.newTabSpec("è§†é¢‘").setIndicator("è§†é¢‘").setContent(intent);
         tabHost.addTab(spec);
         
         intent=new Intent().setClass(this, TestAdapter.class);
-        spec=tabHost.newTabSpec("ÎÒµÄÍ¨Öª").setIndicator("ÎÒµÄÍ¨Öª").setContent(intent);
+        spec=tabHost.newTabSpec("æˆ‘çš„é€šçŸ¥").setIndicator("æˆ‘çš„é€šçŸ¥").setContent(intent);
         tabHost.addTab(spec);
         
      
         intent=new Intent().setClass(this, SettingActivity.class);
-        spec=tabHost.newTabSpec("ÉèÖÃ").setIndicator("ÉèÖÃ").setContent(intent);
+        spec=tabHost.newTabSpec("è®¾ç½®").setIndicator("è®¾ç½®").setContent(intent);
         tabHost.addTab(spec);
         tabHost.setCurrentTab(1);
         
@@ -54,20 +54,20 @@ public class MainActivity extends TabActivity {
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				// TODO Auto-generated method stub
 				switch (checkedId) {
-				case R.id.main_tab_addExam://Ìí¼Ó¿¼ÊÔ
-					tabHost.setCurrentTabByTag("ÒôÆµ");
+				case R.id.main_tab_addExam://ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½
+					tabHost.setCurrentTabByTag("éŸ³é¢‘");
 					break;
-				case R.id.main_tab_myExam://ÎÒµÄ¿¼ÊÔ
-					tabHost.setCurrentTabByTag("ÊÓÆµ");
+				case R.id.main_tab_myExam://ï¿½ÒµÄ¿ï¿½ï¿½ï¿½
+					tabHost.setCurrentTabByTag("è§†é¢‘");
 					break;
-				case R.id.main_tab_message://ÎÒµÄÍ¨Öª
-					tabHost.setCurrentTabByTag("ÎÒµÄÍ¨Öª");
+				case R.id.main_tab_message://ï¿½Òµï¿½Í¨Öª
+					tabHost.setCurrentTabByTag("æˆ‘çš„é€šçŸ¥");
 					break;
-				case R.id.main_tab_settings://ÉèÖÃ
-					tabHost.setCurrentTabByTag("ÉèÖÃ");
+				case R.id.main_tab_settings://ï¿½ï¿½ï¿½ï¿½
+					tabHost.setCurrentTabByTag("è®¾ç½®");
 					break;
 				default:
-					//tabHost.setCurrentTabByTag("ÎÒµÄ¿¼ÊÔ");
+					//tabHost.setCurrentTabByTag("ï¿½ÒµÄ¿ï¿½ï¿½ï¿½");
 					break;
 				}
 			}

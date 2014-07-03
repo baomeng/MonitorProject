@@ -21,9 +21,9 @@ public class BaseActivity extends Activity {
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage("ÄãÈ·¶¨ÍË³öÂğ£¿")
+				builder.setMessage("æ˜¯å¦é€€å‡º?")
 						.setCancelable(false)
-						.setPositiveButton("È·¶¨",
+						.setPositiveButton("ç¡®å®š",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
@@ -31,7 +31,7 @@ public class BaseActivity extends Activity {
 										System.exit(0);
 									}
 								})
-						.setNegativeButton("·µ»Ø",
+						.setNegativeButton("å–æ¶ˆ",
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {

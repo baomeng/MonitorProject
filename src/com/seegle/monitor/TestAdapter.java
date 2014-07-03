@@ -5,34 +5,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 
 public class TestAdapter extends BaseActivity {
 	
-	// »ñÈ¡ÊÓÆµµÄËõÂÔÍ¼
 	private Bitmap getVideoThumbnail(String videoPath, int width, int height,
 			int kind) {
 		Bitmap bitmap = null;		
@@ -91,8 +82,12 @@ public class TestAdapter extends BaseActivity {
 		for (i = 0; i < mVideolistSD.size(); i++) {
 			
 			map = new HashMap<String, Object>();
-			map.put("title", "title£º" + mVideolistSD.get(i).mName);
-			map.put("duration", "duration£º" + mVideolistSD.get(i).mDuration);
+			map.put("title", mVideolistSD.get(i).mName);
+			
+			int iDuration = mVideolistSD.get(i).mDuration;
+			String strDuration = Util.millisTimeToDotFormat(iDuration, false, false);
+			map.put("duration", strDuration);
+
 			map.put("path",  mVideolistSD.get(i).mPath);
 			
 			if (fileIsExists(mVideolistSD.get(i).mPath))
@@ -123,10 +118,10 @@ public class TestAdapter extends BaseActivity {
 		mListView.setAdapter(new BaseListAdapter(this));
 	}
 
-	//ViewHolder¾²Ì¬Àà
+	//ViewHolderï¿½ï¿½Ì¬ï¿½ï¿½
     static class ViewHolder
     {
-    	public String    path; // »º´æÂ·¾¶ ÓÃÓÚ²¥·Å
+    	public String    path; // ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½
         public ImageView img;
         public TextView  title;
         public TextView  duration;
@@ -166,7 +161,7 @@ public class TestAdapter extends BaseActivity {
                 convertView = inflater.inflate(R.layout.test, null);
                
                 viewHolder.title = (TextView) convertView.findViewById(R.id.textView1);
-                viewHolder.duration = (TextView) convertView.findViewById(R.id.textView1);
+                viewHolder.duration = (TextView) convertView.findViewById(R.id.textView2);
                 viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
                 viewHolder.bt = (Button) convertView.findViewById(R.id.button1);
                 

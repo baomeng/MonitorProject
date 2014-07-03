@@ -74,11 +74,11 @@ public class VideoPlayActivity extends BaseActivity {
 			map = new HashMap<String, Object>();
 			
 			map.put("path", mVideolistSD.get(i).mPath);
-			map.put("title", "Ãû³Æ£º" + mVideolistSD.get(i).mName);
+			map.put("title", mVideolistSD.get(i).mName);
 			
 			int iDuration = mVideolistSD.get(i).mDuration;
 			String strDuration = Util.millisTimeToDotFormat(iDuration, false, false);
-			map.put("info", "Ê±³¤£º" + strDuration);
+			map.put("info", strDuration);
 			
 			if (fileIsExists(mVideolistSD.get(i).mPath))
 				map.put("img",getVideoThumbnail(mVideolistSD.get(i).mPath, 120, 120, MediaStore.Images.Thumbnails.MICRO_KIND));
@@ -115,7 +115,7 @@ public class VideoPlayActivity extends BaseActivity {
 
 			public boolean setViewValue(View view, Object data,
 					String textRepresentation) {
-				// ÅĞ¶ÏÊÇ·ñÎªÎÒÃÇÒª´¦ÀíµÄ¶ÔÏó
+				// ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
 				if (view instanceof ImageView && data instanceof Bitmap) {
 					ImageView iv = (ImageView) view;
 
@@ -271,27 +271,27 @@ public class VideoPlayActivity extends BaseActivity {
     }
     
 	/**
-	 * ¸ù¾İÖ¸¶¨µÄÍ¼ÏñÂ·¾¶ºÍ´óĞ¡À´»ñÈ¡ËõÂÔÍ¼ ´Ë·½·¨ÓĞÁ½µãºÃ´¦£º 1.
-	 * Ê¹ÓÃ½ÏĞ¡µÄÄÚ´æ¿Õ¼ä£¬µÚÒ»´Î»ñÈ¡µÄbitmapÊµ¼ÊÉÏÎªnull£¬Ö»ÊÇÎªÁË¶ÁÈ¡¿í¶ÈºÍ¸ß¶È£¬
-	 * µÚ¶ş´Î¶ÁÈ¡µÄbitmapÊÇ¸ù¾İ±ÈÀıÑ¹Ëõ¹ıµÄÍ¼Ïñ£¬µÚÈı´Î¶ÁÈ¡µÄbitmapÊÇËùÒªµÄËõÂÔÍ¼¡£ 2.
-	 * ËõÂÔÍ¼¶ÔÓÚÔ­Í¼ÏñÀ´½²Ã»ÓĞÀ­Éì£¬ÕâÀïÊ¹ÓÃÁË2.2°æ±¾µÄĞÂ¹¤¾ßThumbnailUtils£¬Ê¹ ÓÃÕâ¸ö¹¤¾ßÉú³ÉµÄÍ¼Ïñ²»»á±»À­Éì¡£
+	 * ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Â·ï¿½ï¿½ï¿½Í´ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í¼ ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ 1.
+	 * Ê¹ï¿½Ã½ï¿½Ğ¡ï¿½ï¿½ï¿½Ú´ï¿½Õ¼ä£¬ï¿½ï¿½Ò»ï¿½Î»ï¿½È¡ï¿½ï¿½bitmapÊµï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½Ö»ï¿½ï¿½Îªï¿½Ë¶ï¿½È¡ï¿½ï¿½ÈºÍ¸ß¶È£ï¿½
+	 * ï¿½Ú¶ï¿½ï¿½Î¶ï¿½È¡ï¿½ï¿½bitmapï¿½Ç¸ï¿½İ±ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ñ£¬µï¿½ï¿½ï¿½Î¶ï¿½È¡ï¿½ï¿½bitmapï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ 2.
+	 * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ô­Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ì£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½2.2ï¿½æ±¾ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½ThumbnailUtilsï¿½ï¿½Ê¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½Í¼ï¿½ñ²»»á±»ï¿½ï¿½ï¿½ì¡£
 	 * 
 	 * @param imagePath
-	 *            Í¼ÏñµÄÂ·¾¶
+	 *            Í¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 	 * @param width
-	 *            Ö¸¶¨Êä³öÍ¼ÏñµÄ¿í¶È
+	 *            Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ä¿ï¿½ï¿½
 	 * @param height
-	 *            Ö¸¶¨Êä³öÍ¼ÏñµÄ¸ß¶È
-	 * @return Éú³ÉµÄËõÂÔÍ¼
+	 *            Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ä¸ß¶ï¿½
+	 * @return ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private Bitmap getImageThumbnail(String imagePath, int width, int height) {
 		Bitmap bitmap = null;
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
-		// »ñÈ¡Õâ¸öÍ¼Æ¬µÄ¿íºÍ¸ß£¬×¢Òâ´Ë´¦µÄbitmapÎªnull
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ä¿ï¿½Í¸ß£ï¿½×¢ï¿½ï¿½Ë´ï¿½ï¿½ï¿½bitmapÎªnull
 		bitmap = BitmapFactory.decodeFile(imagePath, options);
-		options.inJustDecodeBounds = false; // ÉèÎª false
-		// ¼ÆËãËõ·Å±È
+		options.inJustDecodeBounds = false; // ï¿½ï¿½Îª false
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å±ï¿½
 		int h = options.outHeight;
 		int w = options.outWidth;
 		int beWidth = w / width;
@@ -306,33 +306,33 @@ public class VideoPlayActivity extends BaseActivity {
 			be = 1;
 		}
 		options.inSampleSize = be;
-		// ÖØĞÂ¶ÁÈëÍ¼Æ¬£¬¶ÁÈ¡Ëõ·ÅºóµÄbitmap£¬×¢ÒâÕâ´ÎÒª°Ñoptions.inJustDecodeBounds ÉèÎª false
+		// ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Åºï¿½ï¿½bitmapï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½options.inJustDecodeBounds ï¿½ï¿½Îª false
 		bitmap = BitmapFactory.decodeFile(imagePath, options);
-		// ÀûÓÃThumbnailUtilsÀ´´´½¨ËõÂÔÍ¼£¬ÕâÀïÒªÖ¸¶¨ÒªËõ·ÅÄÄ¸öBitmap¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½ThumbnailUtilsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ¸ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½Bitmapï¿½ï¿½ï¿½ï¿½
 		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
 				ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 		return bitmap;
 	}
 
 	/**
-	 * »ñÈ¡ÊÓÆµµÄËõÂÔÍ¼ ÏÈÍ¨¹ıThumbnailUtilsÀ´´´½¨Ò»¸öÊÓÆµµÄËõÂÔÍ¼£¬È»ºóÔÙÀûÓÃThumbnailUtilsÀ´Éú³ÉÖ¸¶¨´óĞ¡µÄËõÂÔÍ¼¡£
-	 * Èç¹ûÏëÒªµÄËõÂÔÍ¼µÄ¿íºÍ¸ß¶¼Ğ¡ÓÚMICRO_KIND£¬ÔòÀàĞÍÒªÊ¹ÓÃMICRO_KIND×÷ÎªkindµÄÖµ£¬ÕâÑù»á½ÚÊ¡ÄÚ´æ¡£
+	 * ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ ï¿½ï¿½Í¨ï¿½ï¿½ThumbnailUtilsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ThumbnailUtilsï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¿ï¿½Í¸ß¶ï¿½Ğ¡ï¿½ï¿½MICRO_KINDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÊ¹ï¿½ï¿½MICRO_KINDï¿½ï¿½Îªkindï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½Ú´æ¡£
 	 * 
 	 * @param videoPath
-	 *            ÊÓÆµµÄÂ·¾¶
+	 *            ï¿½ï¿½Æµï¿½ï¿½Â·ï¿½ï¿½
 	 * @param width
-	 *            Ö¸¶¨Êä³öÊÓÆµËõÂÔÍ¼µÄ¿í¶È
+	 *            Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¿ï¿½ï¿½
 	 * @param height
-	 *            Ö¸¶¨Êä³öÊÓÆµËõÂÔÍ¼µÄ¸ß¶È¶È
+	 *            Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¸ß¶È¶ï¿½
 	 * @param kind
-	 *            ²ÎÕÕMediaStore.Images.ThumbnailsÀàÖĞµÄ³£Á¿MINI_KINDºÍMICRO_KIND¡£
-	 *            ÆäÖĞ£¬MINI_KIND: 512 x 384£¬MICRO_KIND: 96 x 96
-	 * @return Ö¸¶¨´óĞ¡µÄÊÓÆµËõÂÔÍ¼
+	 *            ï¿½ï¿½ï¿½ï¿½MediaStore.Images.Thumbnailsï¿½ï¿½ï¿½ĞµÄ³ï¿½ï¿½ï¿½MINI_KINDï¿½ï¿½MICRO_KINDï¿½ï¿½
+	 *            ï¿½ï¿½ï¿½Ğ£ï¿½MINI_KIND: 512 x 384ï¿½ï¿½MICRO_KIND: 96 x 96
+	 * @return Ö¸ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Í¼
 	 */
 	private Bitmap getVideoThumbnail(String videoPath, int width, int height,
 			int kind) {
 		Bitmap bitmap = null;
-		// »ñÈ¡ÊÓÆµµÄËõÂÔÍ¼
+		// ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 		bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
 		System.out.println("w" + bitmap.getWidth());
 		System.out.println("h" + bitmap.getHeight());
