@@ -38,14 +38,14 @@
                  >
 
                 <RadioButton
-                    android:id="@+id/main_tab_addExam"
+                    android:id="@+id/radio_button0"
                     style="@style/MMTabButton"
                     android:layout_weight="1.0"    
                     android:drawableTop="@drawable/bg_checkbox_icon_menu_0"
                     android:text="音频" />
 
                 <RadioButton
-                    android:id="@+id/main_tab_myExam"
+                    android:id="@+id/radio_button1"
                     style="@style/MMTabButton"
                     android:layout_weight="1.0"
                     android:checked="true"
@@ -53,14 +53,14 @@
                     android:text="视频" />
 
                 <RadioButton
-                    android:id="@+id/main_tab_message"
+                    android:id="@+id/radio_button2"
                     style="@style/MMTabButton"
                     android:layout_weight="1.0"
                     android:drawableTop="@drawable/bg_checkbox_icon_menu_2"
                     android:text="我的通知" />
 
                 <RadioButton
-                    android:id="@+id/main_tab_settings"
+                    android:id="@+id/radio_button3"
                     style="@style/MMTabButton"
                     android:layout_weight="1.0"   
                     android:drawableTop="@drawable/bg_checkbox_icon_menu_3"

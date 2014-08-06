@@ -13,146 +13,127 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-public class ClearEditText extends EditText implements  OnFocusChangeListener, TextWatcher {
-
-	 /** 
-     * É¾³ý°´Å¥µÄÒýÓÃ 
-     */  
-    private Drawable mClearDrawable;   
-	 /** 
-     * É¾³ý°´Å¥µÄÒýÓÃ 
-     */  
- //   private Drawable mSelectDrawable;
-    /** 
-     * ¿Ø¼þÊÇ·ñÓÐ½¹µã 
-     */  
-    private boolean hasFoucs;  
-   
-    public ClearEditText(Context context) {   
-        this(context, null);   
-    }   
-   
-    public ClearEditText(Context context, AttributeSet attrs) {   
-        //ÕâÀï¹¹Ôì·½·¨Ò²ºÜÖØÒª£¬²»¼ÓÕâ¸öºÜ¶àÊôÐÔ²»ÄÜÔÙXMLÀïÃæ¶¨Òå  
-        this(context, attrs, android.R.attr.editTextStyle);   
-    }   
-      
-    public ClearEditText(Context context, AttributeSet attrs, int defStyle) {  
-        super(context, attrs, defStyle);  
-        init();  
-    }  
-      
-      
-    private void init() {
-//    	mSelectDrawable = getCompoundDrawables()[2];   
-//        if (mSelectDrawable == null) {   
-//        	mSelectDrawable = getResources().getDrawable(R.drawable.button2);   
-//        }
-//        mSelectDrawable.setBounds(0, 0, mSelectDrawable.getIntrinsicWidth(), mSelectDrawable.getIntrinsicHeight());   
-    	
-      //»ñÈ¡EditTextµÄDrawableRight,¼ÙÈçÃ»ÓÐÉèÖÃÎÒÃÇ¾ÍÊ¹ÓÃÄ¬ÈÏµÄÍ¼Æ¬  
-        mClearDrawable = getCompoundDrawables()[2];   
-        if (mClearDrawable == null) {   
-//          throw new NullPointerException("You can add drawableRight attribute in XML");  
-            mClearDrawable = getResources().getDrawable(R.drawable.del);   
-        }   
-          
-        mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());   
-        //Ä¬ÈÏÉèÖÃÒþ²ØÍ¼±ê  
-        setClearIconVisible(false);   
-        //ÉèÖÃ½¹µã¸Ä±äµÄ¼àÌý  
-        setOnFocusChangeListener((OnFocusChangeListener) this);   
-        //ÉèÖÃÊäÈë¿òÀïÃæÄÚÈÝ·¢Éú¸Ä±äµÄ¼àÌý  
-        addTextChangedListener(this);   
-    }   
-   
-   
-    /** 
-     * ÒòÎªÎÒÃÇ²»ÄÜÖ±½Ó¸øEditTextÉèÖÃµã»÷ÊÂ¼þ£¬ËùÒÔÎÒÃÇÓÃ¼Ç×¡ÎÒÃÇ°´ÏÂµÄÎ»ÖÃÀ´Ä£Äâµã»÷ÊÂ¼þ 
-     * µ±ÎÒÃÇ°´ÏÂµÄÎ»ÖÃ ÔÚ  EditTextµÄ¿í¶È - Í¼±êµ½¿Ø¼þÓÒ±ßµÄ¼ä¾à - Í¼±êµÄ¿í¶È  ºÍ 
-     * EditTextµÄ¿í¶È - Í¼±êµ½¿Ø¼þÓÒ±ßµÄ¼ä¾àÖ®¼äÎÒÃÇ¾ÍËãµã»÷ÁËÍ¼±ê£¬ÊúÖ±·½Ïò¾ÍÃ»ÓÐ¿¼ÂÇ 
-     */  
-    @Override   
-    public boolean onTouchEvent(MotionEvent event) {  
-        if (event.getAction() == MotionEvent.ACTION_UP) {  
-            if (getCompoundDrawables()[2] != null) {  
-  
-                boolean touchable = event.getX() > (getWidth() - getTotalPaddingRight())  
-                        && (event.getX() < ((getWidth() - getPaddingRight())));  
-                  
-                if (touchable) {  
-                    this.setText("");  
-                }  
-            }  
-        }  
-  
-        return super.onTouchEvent(event);  
-    }  
-   
-    /** 
-     * µ±ClearEditText½¹µã·¢Éú±ä»¯µÄÊ±ºò£¬ÅÐ¶ÏÀïÃæ×Ö·û´®³¤¶ÈÉèÖÃÇå³ýÍ¼±êµÄÏÔÊ¾ÓëÒþ²Ø 
-     */  
-    public void onFocusChange(View v, boolean hasFocus) {   
-        this.hasFoucs = hasFocus;  
-        if (hasFocus) {   
-            setClearIconVisible(getText().length() > 0);   
-        } else {   
-            setClearIconVisible(false);   
-        }   
-    }   
-   
-    /** 
-     * ÉèÖÃÇå³ýÍ¼±êµÄÏÔÊ¾ÓëÒþ²Ø£¬µ÷ÓÃsetCompoundDrawablesÎªEditText»æÖÆÉÏÈ¥ 
-     * @param visible 
-     */  
-    protected void setClearIconVisible(boolean visible) {   
-        Drawable right = visible ? mClearDrawable : null;   
-        setCompoundDrawables(getCompoundDrawables()[0],   
-                getCompoundDrawables()[1], right, getCompoundDrawables()[3]);   
-    }   
-       
-      
-    /** 
-     * µ±ÊäÈë¿òÀïÃæÄÚÈÝ·¢Éú±ä»¯µÄÊ±ºò»Øµ÷µÄ·½·¨ 
-     */  
-    @Override   
-    public void onTextChanged(CharSequence s, int start, int count,   
-            int after) {   
-                if(hasFoucs){  
-                    setClearIconVisible(s.length() > 0);  
-                }  
-    }   
-   
-    @Override   
-    public void beforeTextChanged(CharSequence s, int start, int count,   
-            int after) {   
-           
-    }   
-   
-    @Override   
-    public void afterTextChanged(Editable s) {   
-           
-    }   
-      
+public class ClearEditText extends EditText implements  
+        OnFocusChangeListener, TextWatcher { 
+	/**
+	 * É¾ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 */
+    private Drawable mClearDrawable; 
+ 
+    public ClearEditText(Context context) { 
+    	this(context, null); 
+    } 
+ 
+    public ClearEditText(Context context, AttributeSet attrs) { 
+    	//ï¿½ï¿½ï¿½ï¹¹ï¿½ì·½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¶ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½XMLï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½
+    	this(context, attrs, android.R.attr.editTextStyle); 
+    } 
+    
+    public ClearEditText(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+    
+    
+    private void init() { 
+    	//ï¿½ï¿½È¡EditTextï¿½ï¿½DrawableRight,ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½Ê¹ï¿½ï¿½Ä¬ï¿½Ïµï¿½Í¼Æ¬
+    	mClearDrawable = getCompoundDrawables()[2]; 
+        if (mClearDrawable == null) { 
+        	mClearDrawable = getResources() 
+                    .getDrawable(R.drawable.emotionstore_progresscancelbtn); 
+        } 
+        mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight()); 
+        setClearIconVisible(false); 
+        setOnFocusChangeListener(this); 
+        addTextChangedListener(this); 
+    } 
+ 
+ 
+    /**
+     * ï¿½ï¿½Îªï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½Ö±ï¿½Ó¸ï¿½EditTextï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½×¡ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Âµï¿½Î»ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Âµï¿½Î»ï¿½ï¿½ ï¿½ï¿½  EditTextï¿½Ä¿ï¿½ï¿½ - Í¼ï¿½êµ½ï¿½Ø¼ï¿½ï¿½Ò±ßµÄ¼ï¿½ï¿½ - Í¼ï¿½ï¿½Ä¿ï¿½ï¿½  ï¿½ï¿½
+     * EditTextï¿½Ä¿ï¿½ï¿½ - Í¼ï¿½êµ½ï¿½Ø¼ï¿½ï¿½Ò±ßµÄ¼ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ê£¬ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¿ï¿½ï¿½ï¿½
+     */
+    @Override 
+    public boolean onTouchEvent(MotionEvent event) { 
+        if (getCompoundDrawables()[2] != null) { 
+            if (event.getAction() == MotionEvent.ACTION_UP) { 
+            	boolean touchable = event.getX() > (getWidth() 
+                        - getPaddingRight() - mClearDrawable.getIntrinsicWidth()) 
+                        && (event.getX() < ((getWidth() - getPaddingRight())));
+                if (touchable) { 
+                    this.setText(""); 
+                } 
+            } 
+        } 
+ 
+        return super.onTouchEvent(event); 
+    } 
+ 
+    /**
+     * ï¿½ï¿½ClearEditTextï¿½ï¿½ï¿½ã·¢ï¿½ï¿½ä»¯ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     */
+    @Override 
+    public void onFocusChange(View v, boolean hasFocus) { 
+        if (hasFocus) { 
+            setClearIconVisible(getText().length() > 0); 
+        } else { 
+            setClearIconVisible(false); 
+        } 
+    } 
+ 
+ 
+    /**
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½setCompoundDrawablesÎªEditTextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
+     * @param visible
+     */
+    protected void setClearIconVisible(boolean visible) { 
+        Drawable right = visible ? mClearDrawable : null; 
+        setCompoundDrawables(getCompoundDrawables()[0], 
+                getCompoundDrawables()[1], right, getCompoundDrawables()[3]); 
+    } 
      
-    /** 
-     * ÉèÖÃ»Î¶¯¶¯»­ 
-     */  
-    public void setShakeAnimation(){  
-        this.setAnimation(shakeAnimation(5));  
-    }  
-      
-      
-    /** 
-     * »Î¶¯¶¯»­ 
-     * @param counts 1ÃëÖÓ»Î¶¯¶àÉÙÏÂ 
-     * @return 
-     */  
-    public static Animation shakeAnimation(int counts){  
-        Animation translateAnimation = new TranslateAnimation(0, 10, 0, 0);  
-        translateAnimation.setInterpolator(new CycleInterpolator(counts));  
-        translateAnimation.setDuration(1000);  
-        return translateAnimation;  
-    }  
-
+    
+    /**
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½Ê±ï¿½ï¿½Øµï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+     */
+    @Override 
+    public void onTextChanged(CharSequence s, int start, int count, 
+            int after) { 
+        setClearIconVisible(s.length() > 0); 
+    } 
+ 
+    @Override 
+    public void beforeTextChanged(CharSequence s, int start, int count, 
+            int after) { 
+         
+    } 
+ 
+    @Override 
+    public void afterTextChanged(Editable s) { 
+         
+    } 
+    
+   
+    /**
+     * ï¿½ï¿½ï¿½Ã»Î¶ï¿½ï¿½ï¿½ï¿½ï¿½
+     */
+    public void setShakeAnimation(){
+    	this.setAnimation(shakeAnimation(5));
+    }
+    
+    
+    /**
+     * ï¿½Î¶ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param counts 1ï¿½ï¿½ï¿½Ó»Î¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return
+     */
+    public static Animation shakeAnimation(int counts){
+    	Animation translateAnimation = new TranslateAnimation(0, 10, 0, 0);
+    	translateAnimation.setInterpolator(new CycleInterpolator(counts));
+    	translateAnimation.setDuration(1000);
+    	return translateAnimation;
+    }
+ 
+ 
 }

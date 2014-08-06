@@ -3,7 +3,36 @@ package com.seegle.monitor;
 import android.widget.ImageView;
 
 public class MediaInfo {
-    public String    mName;      // Ãû
-    public int       mDuration;  // Ê±³¤
-    public String    mPath;      // Â·¾¶
+    public String    mName;      // ï¿½ï¿½
+    public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
+
+	public int       mDuration;  // Ê±ï¿½ï¿½
+    public String    mPath;      // Â·ï¿½ï¿½
+    public String    mthumbPath; //
+    
+	public String getMthumbPath() {
+		return mthumbPath;
+	}
+
+	public void setMthumbPath(String mthumbPath) {
+		this.mthumbPath = mthumbPath;
+	}
+
+	private String letter;
+
+	public String getLetter() {
+		return letter;
+	}
+
+	public void setLetter(String letter) {
+		this.letter = letter;
+	}
+	
+	
 }

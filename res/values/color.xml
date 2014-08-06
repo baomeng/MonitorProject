@@ -31,4 +31,16 @@
         <color name="buttom_top">#1e1e1e</color> 
    <color name="buttom_centre">#303030</color> 
    <color name="buttom_buttom">#000000</color>  
+   
+   	<color name="main_tab_color_normal">#FF333333</color>
+	<color name="main_tab_color_pressed">#FFb80000</color>
+	<!-- 主界面标题颜色 -->
+	<color name="main_topbar_color_normal">#FF333333</color>
+	<color name="main_topbar_color_pressed">#FFb80000</color>
+	<!-- Popup颜色 -->
+	<color name="pop_text_color_normal">#FFFFFFFF</color>
+	<color name="pop_text_color_pressed">#FFb80000</color>
+	<!-- Popup标题颜色 -->
+	<color name="pop_title_color">#FF00EC00</color>
+	
 </resources>

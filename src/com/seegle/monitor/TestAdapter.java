@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +13,10 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -21,15 +25,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class TestAdapter extends BaseActivity {
+import com.seegle.monitor.R;
+
+public class TestAdapter extends ActionBarActivity {
 	
+	@SuppressLint("NewApi")
 	private Bitmap getVideoThumbnail(String videoPath, int width, int height,
 			int kind) {
 		Bitmap bitmap = null;		
 		bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
-		System.out.println("w" + bitmap.getWidth());
-		System.out.println("h" + bitmap.getHeight());
+//		System.out.println("w" + bitmap.getWidth());
+//		System.out.println("h" + bitmap.getHeight());
 		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
 				ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 		return bitmap;
@@ -99,14 +107,18 @@ public class TestAdapter extends BaseActivity {
 		return list;
 	}
 	
+	private boolean mLimited;
 	private List<HashMap<String, Object>> data;
 	ListView mListView;
+	private BaseListAdapter mListViewAdapter;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		setContentView(R.layout.listviewt);
 		
@@ -115,13 +127,15 @@ public class TestAdapter extends BaseActivity {
 		getVideoFromSD();
 		data = getListViewVideoData();
 		
-		mListView.setAdapter(new BaseListAdapter(this));
+		mListViewAdapter = new BaseListAdapter(this);
+		mListView.setAdapter(mListViewAdapter);
+		
+		setTitle("视频列表");
 	}
 
-	//ViewHolder��̬��
     static class ViewHolder
     {
-    	public String    path; // ����·�� ���ڲ���
+    	public String    path;
         public ImageView img;
         public TextView  title;
         public TextView  duration;
@@ -138,6 +152,9 @@ public class TestAdapter extends BaseActivity {
             inflater = LayoutInflater.from(mContext);
         }
         
+    	public void setLimit(int limit) {
+    	}
+    	
         @Override
         public int getCount() {
             return data.size();
@@ -162,7 +179,7 @@ public class TestAdapter extends BaseActivity {
                
                 viewHolder.title = (TextView) convertView.findViewById(R.id.textView1);
                 viewHolder.duration = (TextView) convertView.findViewById(R.id.textView2);
-                viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
+                viewHolder.img = (ImageView) convertView.findViewById(R.id.imageView1);
                 viewHolder.bt = (Button) convertView.findViewById(R.id.button1);
                 
                 convertView.setTag(viewHolder);
@@ -172,7 +189,7 @@ public class TestAdapter extends BaseActivity {
                 viewHolder = (ViewHolder) convertView.getTag();
                 
             }
-          
+
             viewHolder.title.setText((CharSequence) data.get(position).get("title"));
             viewHolder.duration.setText((CharSequence) data.get(position).get("duration"));
             viewHolder.img.setImageBitmap((Bitmap) data.get(position).get("img"));  
@@ -186,7 +203,7 @@ public class TestAdapter extends BaseActivity {
                 public void onClick(View v) {
                 	                	
         			if (fileIsExists(path)) {
-    					Intent intent = new Intent(TestAdapter.this, VodeoPlayActivity.class);
+    					Intent intent = new Intent(TestAdapter.this, MusicPlayActivity.class);
     					Bundle bundle = new Bundle();
     					bundle.putString("activity1", path);
     					intent.putExtras(bundle);
@@ -198,4 +215,26 @@ public class TestAdapter extends BaseActivity {
             return convertView;
         }
     }
+    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_expandablelistitem, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_expandable_limit:
+//			mLimited = !mLimited;
+//			item.setChecked(mLimited);
+//			mListViewAdapter.setLimit(mLimited ? 2 : 0);
+			Toast.makeText(this, "setting", Toast.LENGTH_LONG).show();
+			return true;
+		case android.R.id.home:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

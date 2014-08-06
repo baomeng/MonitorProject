@@ -26,8 +26,8 @@ public class login extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		
-	    final ClearEditText username = (ClearEditText) findViewById(R.id.username);  
-	    final ClearEditText password = (ClearEditText) findViewById(R.id.password);  
+	    final inoutEditText username = (inoutEditText) findViewById(R.id.username);  
+	    final inoutEditText password = (inoutEditText) findViewById(R.id.password);  
 	    
 	    // test
 	    username.append("aa");
@@ -38,20 +38,20 @@ public class login extends Activity{
             @Override  
             public void onClick(View v) {  
                 if(TextUtils.isEmpty(username.getText())){  
-                    //ÉèÖÃ»Î¶¯  
+                    //ï¿½ï¿½ï¿½Ã»Î¶ï¿½  
                     username.setShakeAnimation();  
-                    //ÉèÖÃÌáÊ¾  
-                    showToast("ÓÃ»§Ãû²»ÄÜÎª¿Õ");  
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾  
+                    showToast("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½");  
                     return;  
                 }  
                   
                 if(TextUtils.isEmpty(password.getText())){  
                     password.setShakeAnimation();  
-                    showToast("ÃÜÂë²»ÄÜÎª¿Õ");  
+                    showToast("ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Îªï¿½ï¿½");  
                     return;  
                 } 
                 
-                Intent intent1 = new Intent(login.this, MainActivity.class);
+                Intent intent1 = new Intent(login.this, MainActionBarActivity.class);
 				startActivity(intent1);
             }  
 	     });
@@ -70,7 +70,7 @@ public class login extends Activity{
 	}
 	
 	 /** 
-     * ÏÔÊ¾ToastÏûÏ¢ 
+     * ï¿½ï¿½Ê¾Toastï¿½ï¿½Ï¢ 
      * @param msg 
      */  
     private void showToast(String msg){  

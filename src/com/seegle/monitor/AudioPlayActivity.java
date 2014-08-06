@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.seegle.monitor.MyListView.OnRefreshListener;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +17,7 @@ import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,7 +34,7 @@ import android.widget.SimpleAdapter;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.SimpleAdapter.ViewBinder;
 
-public class AudioPlayActivity extends BaseActivity {
+public class AudioPlayActivity extends ActionBarActivity {
 
 	List<MediaInfo> mAudiolist = new ArrayList<MediaInfo>();
 
@@ -161,7 +163,7 @@ public class AudioPlayActivity extends BaseActivity {
 
 				if (fileIsExists(obj.toString())) {
 					Intent intent = new Intent(AudioPlayActivity.this,
-							VodeoPlayActivity.class);
+							MusicPlayActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putString("activity1", obj.toString());
 					intent.putExtras(bundle);
@@ -196,6 +198,7 @@ public class AudioPlayActivity extends BaseActivity {
 	 *            ָ�����ͼ��ĸ߶�
 	 * @return ��ɵ�����ͼ
 	 */
+	@SuppressLint("NewApi")
 	private Bitmap getImageThumbnail(String imagePath, int width, int height) {
 		Bitmap bitmap = null;
 		BitmapFactory.Options options = new BitmapFactory.Options();

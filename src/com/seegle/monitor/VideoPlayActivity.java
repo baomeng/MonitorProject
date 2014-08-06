@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.seegle.monitor.MyListView.OnRefreshListener;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,7 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 
-public class VideoPlayActivity extends BaseActivity {
+public class VideoPlayActivity extends ActionBarActivity {
 
 	List<MediaInfo> mVideolistSD = new ArrayList<MediaInfo>();
 
@@ -174,7 +176,7 @@ public class VideoPlayActivity extends BaseActivity {
 
 				if (fileIsExists(obj.toString())) {
 					Intent intent = new Intent(VideoPlayActivity.this,
-							VodeoPlayActivity.class);
+							MusicPlayActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putString("activity1", obj.toString());
 					intent.putExtras(bundle);
@@ -284,6 +286,7 @@ public class VideoPlayActivity extends BaseActivity {
 	 *            ָ�����ͼ��ĸ߶�
 	 * @return ��ɵ�����ͼ
 	 */
+	@SuppressLint("NewApi")
 	private Bitmap getImageThumbnail(String imagePath, int width, int height) {
 		Bitmap bitmap = null;
 		BitmapFactory.Options options = new BitmapFactory.Options();
@@ -329,6 +332,7 @@ public class VideoPlayActivity extends BaseActivity {
 	 *            ���У�MINI_KIND: 512 x 384��MICRO_KIND: 96 x 96
 	 * @return ָ����С����Ƶ����ͼ
 	 */
+	@SuppressLint("NewApi")
 	private Bitmap getVideoThumbnail(String videoPath, int width, int height,
 			int kind) {
 		Bitmap bitmap = null;

@@ -3,18 +3,42 @@
 
     <string name="hello">Hello World, TestActivity!</string>
     <string name="app_name">Monitor</string>
-
+    <string name="explainexpand">Tap on cards to expand or collapse them</string>
+    <string name="expandorcollapsecard">This is card number %d</string>
+    <string name="limit">设置</string>
+    <string name="expandablelistitemadapter">Expand list items</string>
+    <string name="menu_donate">Buy me a beer!</string>
+    <string name="menu_donate">Buy me a beer!</string>
+    <string name="menu_beer">Buy me a beer!</string>
+    <string name="menu_beer2">Buy me 2 beers!</string>
+    <string name="menu_beer3">Buy me 5 beers!</string>
+    <string name="menu_beer4">Buy me 10 beers!</string>
+    <string name="menu_github">Github</string>
+    <string name="menu_search">search</string>
+    <string name="menu_save">save</string>
+    <string name="menu_github">Github</string>
+    <string name="str_audio">音频</string>
+    <string name="str_video">视频</string>
+    <string name="str_msg">消息</string>
+    <string name="str_set">设置</string>
+    <string name="tab_1">视频</string>
+    <string name="tab_2">音频</string>
+    <string name="tab_3">图片</string>
+    <string name="action_label_search">search</string>
+    <string name="action_label_refresh">refresh</string>
+    <string name="action_label_collected">tab_2</string>
+    
     <style name="MMTabButton">
-		<item name="android:textSize">12.0dip</item>
-		<item name="android:gravity">center_horizontal</item>
-		<item name="android:background">@drawable/bg_checkbox_menus</item>
-		<item name="android:layout_width">fill_parent</item>
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:button">@null</item>
-		<item name="android:textColor">@color/white</item>
-		<item name="android:layout_weight">1.0</item>
-		<item name="android:paddingBottom">2.0dip</item>
-		<item name="android:paddingTop">2.0dip</item>
-		
-	</style>
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@drawable/bg_checkbox_menus</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:paddingBottom">2.0dip</item>
+        <item name="android:paddingTop">2.0dip</item>
+    </style>
+
 </resources>
