@@ -10,24 +10,24 @@ import android.widget.ImageView;
 
 public class WelComeActivity extends Activity{
 	
-	private static final long mDelayMillis = 1000;
+	private static final long mDelayMillis = 500;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		final Window win = getWindow();
-		// ÉèÖÃÉÁÆÁÎªÈ«ÆÁÏÔÊ¾
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÈ«ï¿½ï¿½ï¿½ï¿½Ê¾
 		win.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.welcome);				
 //		ImageView img = (ImageView)findViewById(R.id.logo_text);
 //		ImageView logo_img = (ImageView)findViewById(R.id.spaceshipImage);
 
-		// ÑÓÊ±3sÏÔÊ¾µÇÂ¼½çÃæ
+		// ï¿½ï¿½Ê±3sï¿½ï¿½Ê¾ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
 				Intent mainIntent = new Intent(WelComeActivity.this,
-						login.class);
+						MainActionBarActivity.class);
 				startActivity(mainIntent);
 				finish();
 			}
