@@ -24,7 +24,7 @@
     <string name="tab_1">视频</string>
     <string name="tab_2">音频</string>
     <string name="tab_3">图片</string>
-    <string name="tab_4">ffmpeg播放视频</string>
+    <string name="tab_4">检索</string>
     <string name="action_label_search">search</string>
     <string name="action_label_refresh">refresh</string>
     <string name="action_label_collected">tab_2</string>

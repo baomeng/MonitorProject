@@ -13,5 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="lib" path="D:/android/androidexample/Tencent_Weibo_Android_Open_SDK_V2.2/projects/AndroidSDK/libs/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

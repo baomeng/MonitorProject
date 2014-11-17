@@ -4,7 +4,7 @@
     android:layout_height="match_parent"  
     android:background="@drawable/default_bg" >
 
-    <com.seegle.monitor.inoutEditText
+    <com.seegle.monitor.sn.inoutEditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:password="true"
         android:singleLine="true" />
 
-    <com.seegle.monitor.inoutEditText
+    <com.seegle.monitor.sn.inoutEditText
         android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
